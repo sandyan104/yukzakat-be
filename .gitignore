@@ -1,0 +1,5 @@
+api/__pycache__
+api/akun/__pycache__
+api/akun/migrations
+config/__pycache__
+venv
