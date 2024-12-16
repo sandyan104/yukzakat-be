@@ -7,7 +7,12 @@ from django.contrib.auth import get_user_model, authenticate
 from knox.models import AuthToken
 
 User = get_user_model()
-# Create your views here.
+from rest_framework.viewsets import ModelViewSet
+from .serializers import ArtikelSerializer
+
+class ArtikelViewSet(ModelViewSet):
+    queryset = artikel.objects.all()
+    serializer_class = ArtikelSerializer
 
 class LoginViewset(viewsets.ViewSet):
   permission_classes = [permissions.AllowAny]

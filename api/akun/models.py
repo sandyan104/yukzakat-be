@@ -27,6 +27,7 @@ class role(models.Model):
     nama_role = models.CharField(max_length=50)
     def __str__(self):
         return self.nama_role
+        
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=200, null=True, blank=True)
