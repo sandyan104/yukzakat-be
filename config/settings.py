@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'config',
     'rest_framework',
     'corsheaders',
+    'knox',
     # tambahkan disini setiap membuat app baru
     'api.akun',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # tambahan
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # tambahan - silahkan tambahkan bila localhost menggunakan port yang berbeda
@@ -63,7 +64,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+
+AUTH_USER_MODEL = 'akun.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+  'api.akun.auth_backends.EmailAuthBackend'
+]
+
 ROOT_URLCONF = 'config.urls'
+
 
 TEMPLATES = [
     {
@@ -83,6 +92,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -94,11 +106,11 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'yukzakat',
+        'NAME': 'users',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',
-        'PORT' : '3306'
+        'PORT' : '3308'
     }
 }
 

@@ -1,9 +1,9 @@
+from django.contrib import admin
 from django.urls import path
-from . import views
+from rest_framework.routers import DefaultRouter
+from.views import *
 
-urlpatterns = [
-    path('', views.akun_list, name='akun-list'),
-    path('edit/', views.akun_edit, name='akun-edit'),
-    path('delete/', views.akun_delete, name='akun-delete'),
-    path('create/', views.akun_create, name='akun-create')
-]
+router = DefaultRouter()
+router.register('register', RegisterViewSet, basename='register')
+router.register('login', LoginViewset, basename='login')
+urlpatterns = router.urls
