@@ -3,6 +3,11 @@ from .models import *
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+class ZakatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = zakat
+        fields = '__all__'
+
 class ArtikelSerializer(serializers.ModelSerializer):
     class Meta:
         model = artikel

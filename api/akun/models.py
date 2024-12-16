@@ -27,7 +27,7 @@ class role(models.Model):
     nama_role = models.CharField(max_length=50)
     def __str__(self):
         return self.nama_role
-        
+
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=200, null=True, blank=True)
@@ -104,6 +104,8 @@ class zakat(models.Model):
     tgl_Zakat = models.DateField()
     id_rekap = models.ForeignKey(rekap, on_delete=models.CASCADE)
     id_tipe = models.ForeignKey(tipe_zakat, on_delete=models.CASCADE)
-
+    nominal = models.IntegerField(null = False)
+    hero_image = models.ImageField(upload_to="zakat_images/", blank=False, null=False)
+    
     def __str__(self):
         return self.id_zakat
