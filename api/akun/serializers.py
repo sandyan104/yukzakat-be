@@ -12,13 +12,23 @@ class LoginSerializer(serializers.Serializer):
     ret.pop('password', None) 
     return ret
 
+class AmilSerializer(serializers.ModelSerializer):
+   
+    class Meta:
+        model = amil
+        fields = ('id', 'nama_amil', 'no_telp_amil')  # Atau tentukan fields yang diinginkan
+
 class RegisterSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'email', 'password')
+    fields = ('id', 'email', 'password', 'id_role')
     extra_kwargs = {'password': {'write_only':True}}
 
   def create(self, validated_data):
     user = User.objects.create_user(**validated_data)
     return user
 
+class BayarZakat(serializers.ModelSerializer):
+  class Meta:
+    model = zakat
+    fields = '__all__'

@@ -46,3 +46,32 @@ class RegisterViewSet(viewsets.ViewSet):
       return Response(serializer.data)
     else:
       return Response(serializer.errors, status=400)
+    
+class RegisterAmilViewSet(viewsets.ViewSet):
+  permission_classes = [permissions.AllowAny]
+  queryset = amil.objects.all()
+  serializer_class = AmilSerializer
+
+  def create(self,request):
+    serializer = self.serializer_class(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)
+    else:
+      return Response(serializer.errors, status=400)
+    
+  def list(self, request):
+    queryset = self.queryset
+    serializer = self.serializer_class(queryset, many=True)
+    return Response(serializer.data)
+  
+  def retrieve(self, request, pk=None):
+    regamil = self.queryset.get(pk=pk)
+    serializer = self.serializer_class(regamil)
+    return Response(serializer.data)
+    
+  def destroy(self, request, pk=None):
+    regamil = self.queryset.get(pk=pk)
+    regamil.delete()
+    return Response(status=204)
+  

@@ -6,4 +6,5 @@ from.views import *
 router = DefaultRouter()
 router.register('register', RegisterViewSet, basename='register')
 router.register('login', LoginViewset, basename='login')
+router.register('amil', RegisterAmilViewSet, basename='amil')
 urlpatterns = router.urls

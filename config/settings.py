@@ -61,7 +61,6 @@ MIDDLEWARE = [
 # tambahan - silahkan tambahkan bila localhost menggunakan port yang berbeda
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://127.0.0.1:8000",
 ]
 
 
@@ -106,7 +105,7 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'users',
+        'NAME': 'yukzakat',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',

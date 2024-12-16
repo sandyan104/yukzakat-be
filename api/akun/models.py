@@ -3,20 +3,22 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields ):
+    def create_user(self, email, password=None, id_role=None, **extra_fields ):
         if not email:
             raise ValueError('Email harus diisi!')
         
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
+        user.id_role = id_role
         user.save(using=self._db)
         return user
+        
     
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, id_role=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(email, password, id_role, **extra_fields)
 
 # Create your models here.
 
@@ -28,7 +30,7 @@ class role(models.Model):
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=200, null=True, blank=True)
-    # id_role = models.ForeignKey('Role', on_delete=models.CASCADE)
+    id_role = models.ForeignKey(role, on_delete=models.CASCADE)
 
     objects = CustomUserManager()
 
@@ -36,17 +38,18 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
     
 class amil(models.Model):
-    id_amil = models.CharField(max_length=10, primary_key=True)
+    id_amil = models.AutoField(primary_key=True)
     id = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     nama_amil = models.CharField(max_length=50)
     no_telp_amil = models.CharField(max_length=15)
     
     def __str__(self):
-        return self.id_amil
+        return str(self.id_amil)
+    
 class artikel(models.Model):
     id_artikel = models.CharField(max_length=10, primary_key=True)
     judul = models.CharField(max_length=50)
-    hero_image = models.CharField(max_length=50)
+    hero_image = models.ImageField(upload_to='artikel', null=True, blank=True)
     no_telp_amil = models.CharField(max_length=15)
     id_amil = models.ForeignKey(amil, on_delete=models.CASCADE)
     def __str__(self):
@@ -87,7 +90,7 @@ class tipe_zakat(models.Model):
         return self.id_tipe
     
 class zakat(models.Model):
-    id_zakat = models.CharField(max_length=10, primary_key=True)
+    id_zakat = models.AutoField(primary_key=True)
     nama_mz = models.CharField(max_length=50)
     jk_mz = models.CharField(max_length=3)
     no_telp_mz = models.CharField(max_length=15)
