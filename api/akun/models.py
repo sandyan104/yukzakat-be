@@ -90,14 +90,19 @@ class tipe_zakat(models.Model):
         return str(self.id_tipe)
     
 class zakat(models.Model):
+    choices = (
+        ('P', 'Pria'),
+        ('W', 'Wanita'),
+    )
+
     id_zakat = models.AutoField(primary_key=True)
     nama_mz = models.CharField(max_length=50)
-    jk_mz = models.CharField(max_length=3)
+    jk_mz = models.CharField(choices=choices, max_length=1)
     no_telp_mz = models.CharField(max_length=15)
     email_mz = models.EmailField(max_length=50)
     tgl_Zakat = models.DateField()
     id_rekap = models.ForeignKey(rekap, on_delete=models.CASCADE)
-    id_penerima = models.ForeignKey(penerima, on_delete=models.CASCADE)
     id_tipe = models.ForeignKey(tipe_zakat, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.id_zakat

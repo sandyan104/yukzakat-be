@@ -8,4 +8,5 @@ router.register('register', RegisterViewSet, basename='register')
 router.register('login', LoginViewset, basename='login')
 router.register('amil', RegisterAmilViewSet, basename='amil')
 router.register('distribusi', DistribusiViewset, basename='distribusi')
+router.register('zakat', ZakatViewset, basename='zakat')
 urlpatterns = router.urls

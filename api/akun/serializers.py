@@ -36,4 +36,4 @@ class DistribusiPenerima(serializers.ModelSerializer):
 class BayarZakat(serializers.ModelSerializer):
   class Meta:
     model = zakat
-    fields = '__all__'
+    fields = ('id_tipe', 'nama_mz', 'jk_mz', 'no_telp_mz', 'email_mz')
