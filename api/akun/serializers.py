@@ -27,6 +27,11 @@ class RegisterSerializer(serializers.ModelSerializer):
   def create(self, validated_data):
     user = User.objects.create_user(**validated_data)
     return user
+  
+class DistribusiPenerima(serializers.ModelSerializer):
+  class Meta:
+    model = penerima
+    fields = ('nama_penerima', 'id_kategori', 'id_rekap', 'jml_penerima', 'nominal_total', 'tgl_penyaluran')
 
 class BayarZakat(serializers.ModelSerializer):
   class Meta:

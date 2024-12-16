@@ -47,6 +47,34 @@ class RegisterViewSet(viewsets.ViewSet):
     else:
       return Response(serializer.errors, status=400)
     
+class DistribusiViewset(viewsets.ViewSet):
+  permission_classes = [permissions.AllowAny]
+  queryset = penerima.objects.all()
+  serializer_class = DistribusiPenerima
+
+  def create(self,request):
+    serializer = self.serializer_class(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data)
+    else:
+      return Response(serializer.errors, status=400)
+    
+  def list(self, request):
+    queryset = self.queryset
+    serializer = self.serializer_class(queryset, many=True)
+    return Response(serializer.data)
+  
+  def retrieve(self, request, pk=None):
+    regpenerima = self.queryset.get(pk=pk)
+    serializer = self.serializer_class(regpenerima)
+    return Response(serializer.data)
+    
+  def destroy(self, request, pk=None):
+    regpenerima = self.queryset.get(pk=pk)
+    regpenerima.delete()
+    return Response(status=204)
+    
 class RegisterAmilViewSet(viewsets.ViewSet):
   permission_classes = [permissions.AllowAny]
   queryset = amil.objects.all()

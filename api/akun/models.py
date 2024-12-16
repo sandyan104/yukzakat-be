@@ -53,16 +53,16 @@ class artikel(models.Model):
     no_telp_amil = models.CharField(max_length=15)
     id_amil = models.ForeignKey(amil, on_delete=models.CASCADE)
     def __str__(self):
-        return self.id_artikel
+        return str(self.id_artikel)
     
 class kategori_penerima(models.Model):
-    id_kategori = models.CharField(max_length=10, primary_key=True)
+    id_kategori = models.AutoField(primary_key=True)
     nama_kategori = models.CharField(max_length=50)
     def __str__(self):
-        return self.id_kategori
+        return str(self.id_kategori)
     
 class rekap(models.Model):
-    id_rekap = models.CharField(max_length=10, primary_key=True)
+    id_rekap = models.AutoField(primary_key=True)
     nama_rekap = models.CharField(max_length=50)
     id_amil = models.ForeignKey(amil, on_delete=models.CASCADE)
     total = models.IntegerField()
@@ -70,10 +70,10 @@ class rekap(models.Model):
     tgl_akhir = models.DateField()
 
     def __str__(self):
-        return self.id_rekap
+        return str(self.id_rekap)
     
 class penerima(models.Model):
-    id_penerima = models.CharField(max_length=10, primary_key=True)
+    id_penerima = models.AutoField(primary_key=True)
     nama_penerima = models.CharField(max_length=50)
     id_kategori = models.ForeignKey(kategori_penerima, on_delete=models.CASCADE)
     id_rekap = models.ForeignKey(rekap, on_delete=models.CASCADE)
@@ -81,13 +81,13 @@ class penerima(models.Model):
     nominal_total = models.IntegerField()
     tgl_penyaluran = models.DateField()
     def __str__(self):
-        return self.id_penerima
+        return str(self.id_penerima)
     
 class tipe_zakat(models.Model):
-    id_tipe = models.CharField(max_length=10, primary_key=True)
+    id_tipe = models.AutoField(primary_key=True)
     nama_zakat = models.CharField(max_length=50)
     def __str__(self):
-        return self.id_tipe
+        return str(self.id_tipe)
     
 class zakat(models.Model):
     id_zakat = models.AutoField(primary_key=True)
