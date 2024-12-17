@@ -106,6 +106,7 @@ class zakat(models.Model):
     id_tipe = models.ForeignKey(tipe_zakat, on_delete=models.CASCADE)
     nominal = models.IntegerField(null=False, blank=False)
     hero_image = models.ImageField(upload_to="zakat_images/", null=False, blank=False)
+    is_accepted = models.BooleanField(default=False, null=False, blank=False) 
     
     def __str__(self):
         return self.id_zakat
