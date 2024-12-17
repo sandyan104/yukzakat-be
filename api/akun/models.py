@@ -48,7 +48,7 @@ class amil(models.Model):
         return str(self.id_amil)
     
 class artikel(models.Model):
-    id_artikel = models.CharField(max_length=10, primary_key=True)
+    id_artikel = models.AutoField(primary_key=True)
     judul = models.CharField(max_length=50)
     hero_image = models.ImageField(upload_to='artikel', null=True, blank=True)
     no_telp_amil = models.CharField(max_length=15)

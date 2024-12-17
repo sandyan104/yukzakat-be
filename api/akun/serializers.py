@@ -11,7 +11,7 @@ class ZakatSerializer(serializers.ModelSerializer):
 class ArtikelSerializer(serializers.ModelSerializer):
     class Meta:
         model = artikel
-        fields = '__all__'
+        fields = ('judul', 'hero_image', 'no_telp_amil', 'id_amil')
 
 class LoginSerializer(serializers.Serializer):
   email = serializers.EmailField()
