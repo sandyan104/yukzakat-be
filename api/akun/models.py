@@ -104,8 +104,8 @@ class zakat(models.Model):
     tgl_Zakat = models.DateField()
     id_rekap = models.ForeignKey(rekap, on_delete=models.CASCADE)
     id_tipe = models.ForeignKey(tipe_zakat, on_delete=models.CASCADE)
-    nominal = models.IntegerField(null = False)
-    hero_image = models.ImageField(upload_to="zakat_images/", blank=False, null=False)
+    nominal = models.IntegerField(null=False, blank=False)
+    hero_image = models.ImageField(upload_to="zakat_images/", null=False, blank=False)
     
     def __str__(self):
         return self.id_zakat
